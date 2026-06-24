@@ -150,7 +150,6 @@ class MainViewModel : ViewModel() {
         errorMessage.value = null
     }
 
-    // Fungsi untuk mengosongkan layar saat logout
     fun clearData() {
         data.value = emptyList()
         categories.value = emptyList()

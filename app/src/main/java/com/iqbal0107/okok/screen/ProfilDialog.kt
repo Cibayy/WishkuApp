@@ -40,7 +40,6 @@ fun ProfilDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                // Header gradient ungu
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -52,7 +51,6 @@ fun ProfilDialog(
                         ),
                     contentAlignment = Alignment.BottomCenter
                 ) {
-                    // Avatar foto profil
                     Box(
                         modifier = Modifier
                             .offset(y = 40.dp)
@@ -75,7 +73,6 @@ fun ProfilDialog(
                                     .clip(CircleShape)
                             )
                         } else {
-                            // Fallback inisial jika foto tidak ada
                             Box(
                                 modifier = Modifier
                                     .size(80.dp)
@@ -94,7 +91,6 @@ fun ProfilDialog(
                     }
                 }
 
-                // Spacer untuk ruang avatar yang overflow
                 Spacer(modifier = Modifier.height(48.dp))
 
                 // Nama & Email
@@ -117,7 +113,6 @@ fun ProfilDialog(
                     modifier = Modifier.padding(horizontal = 24.dp)
                 )
 
-                // Badge "Member Wishku"
                 Spacer(modifier = Modifier.height(10.dp))
                 Surface(
                     shape = RoundedCornerShape(20.dp),
@@ -168,7 +163,6 @@ fun ProfilDialog(
                         )
                     }
 
-                    // Tombol Logout
                     Button(
                         onClick = { onConfirmation() },
                         modifier = Modifier

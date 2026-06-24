@@ -68,12 +68,11 @@ import java.util.Locale
 private const val WEB_CLIENT_ID =
     "57316136151-nr7s9e1c1mhogtnsq7oalr0fp0b33jgu.apps.googleusercontent.com"
 
-// Palet warna untuk kategori item
 private val categoryColors = listOf(
-    Color(0xFFEEEDFE) to Color(0xFF534AB7), // Ungu
-    Color(0xFFE1F5EE) to Color(0xFF0F6E56), // Teal
-    Color(0xFFFAECE7) to Color(0xFF993C1D), // Coral
-    Color(0xFFFAEEDA) to Color(0xFF854F0B), // Amber
+    Color(0xFFEEEDFE) to Color(0xFF534AB7),
+    Color(0xFFE1F5EE) to Color(0xFF0F6E56),
+    Color(0xFFFAECE7) to Color(0xFF993C1D),
+    Color(0xFFFAEEDA) to Color(0xFF854F0B),
 )
 
 @Suppress("DEPRECATION")
@@ -119,7 +118,6 @@ fun MainScreen() {
                     titleContentColor = Color(0xFF1A1A1A)
                 ),
                 title = {
-                    // Teks logo dengan warna split menggunakan Row
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             "Wish",
@@ -146,7 +144,6 @@ fun MainScreen() {
                         }
                     }) {
                         if (user.email.isNotEmpty()) {
-                            // Avatar dengan inisial user
                             Box(
                                 modifier = Modifier
                                     .size(34.dp)
@@ -260,7 +257,6 @@ fun ScreenContent(
         ApiStatus.SUCCESS -> {
             Column(modifier = modifier.fillMaxSize()) {
 
-                // --- HERO BUDGET CARD ---
                 if (data.isNotEmpty()) {
                     val totalBudget = data.sumOf { it.price }
 
@@ -319,7 +315,6 @@ fun ScreenContent(
                     }
                 }
 
-                // --- FILTER CHIP KATEGORI ---
                 val categories = listOf("Semua") + data.mapNotNull { it.category_name }.distinct()
                 val filteredData = if (selectedCategory == "Semua") data
                 else data.filter { it.category_name == selectedCategory }
@@ -359,7 +354,6 @@ fun ScreenContent(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
                 )
 
-                // --- GRID ITEM ---
                 LazyVerticalGrid(
                     modifier = Modifier
                         .fillMaxSize()
@@ -387,10 +381,17 @@ fun ScreenContent(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Icon(
+                    painter = painterResource(R.drawable.broken_img),
+                    contentDescription = null,
+                    tint = Color(0xFF888780).copy(alpha = 0.5f),
+                    modifier = Modifier.size(64.dp).padding(bottom = 16.dp)
+                )
                 Text(
                     "Gagal memuat data..",
                     fontSize = 15.sp,
-                    color = Color(0xFF5F5E5A)
+                    color = Color(0xFF5F5E5A),
+                    fontWeight = FontWeight.Medium
                 )
                 Text(
                     "Periksa koneksi internetmu",
@@ -399,12 +400,12 @@ fun ScreenContent(
                     modifier = Modifier.padding(top = 4.dp)
                 )
                 Button(
-                    onClick = { viewModel.retrieveData(token) },
-                    modifier = Modifier.padding(top = 16.dp),
+                    onClick = { viewModel.retrieveData(token) }, // Tombol Try Again
+                    modifier = Modifier.padding(top = 24.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF534AB7)),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Coba lagi")
+                    Text("Coba lagi", modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         }
@@ -438,7 +439,6 @@ fun ListItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column {
-            // Gambar / placeholder berwarna
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -454,8 +454,6 @@ fun ListItem(
                             .build(),
                         contentDescription = item.name,
                         contentScale = ContentScale.Crop,
-                        placeholder = painterResource(R.drawable.broken_img),
-                        error = painterResource(R.drawable.broken_img),
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
@@ -527,7 +525,6 @@ fun ListItem(
                     modifier = Modifier.padding(top = 2.dp)
                 )
 
-                // --- PENAMBAHAN TAMPILAN CATATAN ---
                 if (!item.notes.isNullOrEmpty()) {
                     Text(
                         text = item.notes,
@@ -539,7 +536,6 @@ fun ListItem(
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 }
-                // ------------------------------------
 
                 item.category_name?.let { cat ->
                     Surface(
